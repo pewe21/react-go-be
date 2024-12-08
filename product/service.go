@@ -3,6 +3,7 @@ package product
 import (
 	"context"
 	"errors"
+
 	"github.com/pewe21/newbelajar/dto"
 	"github.com/pewe21/newbelajar/model"
 )
@@ -96,8 +97,9 @@ func (s service) Update(ctx context.Context, id int, product dto.UpdateProductDT
 	}
 
 	prod := model.ProductModel{
-		Name:  product.Name,
-		Price: product.Price,
+		Name:        product.Name,
+		Price:       product.Price,
+		Description: product.Description,
 	}
 	err := s.repo.Update(ctx, id, prod)
 	return err

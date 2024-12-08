@@ -3,9 +3,10 @@ package product
 import (
 	"context"
 	"database/sql"
+	"log"
+
 	"github.com/doug-martin/goqu/v9"
 	"github.com/pewe21/newbelajar/model"
-	"log"
 )
 
 type Repository interface {
@@ -45,8 +46,10 @@ func (r repository) GetById(ctx context.Context, id int) (product model.ProductM
 
 func (r repository) Update(ctx context.Context, id int, product model.ProductModel) error {
 	executor := r.db.Update("products").Set(goqu.Ex{
-		"name":  product.Name,
-		"price": product.Price,
+		"name":        product.Name,
+		"price":       product.Price,
+		"description": product.Description,
+		"updated_at":  goqu.L("NOW()"),
 	}).Where(goqu.C("id").Eq(id)).Executor()
 	_, err := executor.ExecContext(ctx)
 	return err

@@ -8,8 +8,9 @@ type CreateProductDTO struct {
 }
 
 type UpdateProductDTO struct {
-	Name  string `json:"name"`
-	Price int64  `json:"price"`
+	Name        string `json:"name"`
+	Price       int64  `json:"price"`
+	Description string `json:"description"`
 }
 
 type ProductDTO struct {

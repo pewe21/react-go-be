@@ -3,11 +3,13 @@ package product
 import (
 	"context"
 	"errors"
-	"github.com/gofiber/fiber/v2"
-	"github.com/pewe21/newbelajar/dto"
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/gofiber/fiber/v2"
+	"github.com/pewe21/newbelajar/dto"
 )
 
 type Handler interface {
@@ -97,6 +99,8 @@ func (h handler) Update(ctx *fiber.Ctx) error {
 	data := dto.UpdateProductDTO{}
 
 	errs := ctx.BodyParser(&data)
+
+	fmt.Println(data)
 	if errs != nil {
 		return ctx.Status(http.StatusBadRequest).JSON(fiber.Map{
 			"error": errs,
